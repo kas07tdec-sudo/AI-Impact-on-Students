@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Impact Engine - Parameter Array</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --card-dark: #121216;
+            --neon-blue: #00f0ff;
+            --neon-green: #39ff14;
+            --border-color: #24242e;
+            --text-muted: #8a8a9e;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .cyber-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .badge-top {
+            display: inline-block;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        header h1 { 
+            font-size: 2.2rem; 
+            margin: 5px 0; 
+            letter-spacing: 3px; 
+        }
+        .cyber-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .form-section-title {
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 10px;
+            margin: 25px 0 15px 0;
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #e2e2ec;
+        }
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .full-span { 
+            grid-column: 1 / -1; 
+        }
+        .input-block {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .input-block label { 
+            font-size: 0.8rem; 
+            color: var(--text-muted); 
+        }
+        input, select {
+            background-color: #1a1a22;
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            color: white;
+            font-family: inherit;
+        }
+        input:focus, select:focus { 
+            outline: none; 
+            border-color: var(--neon-blue); 
+        }
+        input[type="range"] { 
+            appearance: none; 
+            -webkit-appearance: none;
+            background: #22222b; 
+            height: 6px; 
+        }
+        input[type="range"]::-webkit-slider-thumb { 
+            appearance: none; 
+            -webkit-appearance: none;
+            width: 14px; 
+            height: 14px; 
+            background: var(--neon-blue); 
+            cursor: pointer; 
+        }
+        .neon-btn {
+            width: 100%;
+            margin-top: 35px;
+            background: transparent;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 15px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        .neon-btn:hover {
+            background-color: var(--neon-green);
+            color: black;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-container">
+        <header>
+            <div class="badge-top">METRIC CAPTURE NODE</div>
+            <h1>PARAMETER CONFIGURATION</h1>
+        </header>
+
+        <form id="metricsForm" class="cyber-card">
+            <div class="form-section-title">Academic & Structural Baseline</div>
+            <div class="grid-layout">
+                <div class="input-block">
+                    <label>Major Category</label>
+                    <select id="Major_Category" required>
+                        <option value="STEM">STEM</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Business">Business</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Humanities">Humanities</option>
+                    </select>
+                </div>
+                <div class="input-block">
+                    <label>Current Academic Year</label>
+                    <select id="Year_of_Study" required>
+                        <option value="Freshman">Freshman</option>
+                        <option value="Sophomore">Sophomore</option>
+                        <option value="Junior">Junior</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                </div>
+                <div class="input-block">
+                    <label>Pre-Semester GPA</label>
+                    <input type="number" id="Pre_Semester_GPA" step="0.001" min="0" max="4" value="3.500" required>
+                </div>
+                <div class="input-block">
+                    <label>Traditional Study Hours / Wk</label>
+                    <input type="number" id="Traditional_Study_Hours" step="0.1" value="12.0" required>
+                </div>
+            </div>
+
+            <div class="form-section-title">Generative AI Footprint</div>
+            <div class="grid-layout">
+                <div class="input-block">
+                    <label>Weekly GenAI Hours</label>
+                    <input type="number" id="Weekly_GenAI_Hours" step="0.01" value="4.50" required>
+                </div>
+                <div class="input-block">
+                    <label>Primary Use Case</label>
+                    <select id="Primary_Use_Case" required>
+                        <option value="Ideation">Ideation</option>
+                        <option value="Copywriting/Drafting">Copywriting/Drafting</option>
+                        <option value="Summarizing_Reading">Summarizing/Reading</option>
+                        <option value="Debugging/Troubleshooting">Debugging/Troubleshooting</option>
+                        <option value="Direct_Answer_Generation">Direct Answer Gen</option>
+                    </select>
+                </div>
+                <div class="input-block">
+                    <label>Prompt Engineering Level</label>
+                    <select id="Prompt_Engineering_Skill" required>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="input-block">
+                    <label>Tool Diversity Count (1-5)</label>
+                    <input type="number" id="Tool_Diversity" min="1" max="5" value="2" required>
+                </div>
+                <div class="input-block">
+                    <label>Premium Account Access</label>
+                    <select id="Paid_Subscription" required>
+                        <option value="False">Free Tier Only</option>
+                        <option value="True">Paid Premium Account</option>
+                    </select>
+                </div>
+                <div class="input-block">
+                    <label>Institutional Policy Constraint</label>
+                    <select id="Institutional_Policy" required>
+                        <option value="Allowed_With_Citation">Allowed With Citation</option>
+                        <option value="Strict_Ban">Strict Ban</option>
+                        <option value="Actively_Encouraged">Actively Encouraged</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section-title">Psychometric & Performance Measures</div>
+            <div class="grid-layout">
+                <div class="input-block">
+                    <label>Exam Anxiety Level (1-10): <span id="anxietyVal">5</span></label>
+                    <input type="range" id="Anxiety_Level_During_Exams" min="1" max="10" value="5">
+                </div>
+                <div class="input-block">
+                    <label>Perceived AI Dependency (1-10): <span id="depVal">5</span></label>
+                    <input type="range" id="Perceived_AI_Dependency" min="1" max="10" value="5">
+                </div>
+                <div class="input-block full-span">
+                    <label>Estimated Skill Retention Score: <span id="retentionVal">75</span>%</label>
+                    <input type="range" id="Skill_Retention_Score" min="0" max="100" value="75" step="0.1">
+                </div>
+            </div>
+
+            <button type="submit" class="neon-btn">RUN PREDICTIVE INFERENCE</button>
+        </form>
+    </div>
+
+    <script>
+        // Synchronous interface value counters tracking
+        document.getElementById('Anxiety_Level_During_Exams').addEventListener('input', (e) => { 
+            document.getElementById('anxietyVal').textContent = e.target.value; 
+        });
+        document.getElementById('Perceived_AI_Dependency').addEventListener('input', (e) => { 
+            document.getElementById('depVal').textContent = e.target.value; 
+        });
+        document.getElementById('Skill_Retention_Score').addEventListener('input', (e) => { 
+            document.getElementById('retentionVal').textContent = e.target.value; 
+        });
+
+        // Async network submission capture block
+        document.getElementById('metricsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // 🌐 TARGET DESTINATION PORT ASSIGNMENT:
+            // Use "127.0.0.1" for processing locally on your computer desktop frame,
+            // or switch to your specific broadcast IP (e.g., "192.168.29.5") when connecting over mobile browser links.
+            const serverIP = "127.0.0.1"; 
+            
+            const payload = {
+                Major_Category: document.getElementById('Major_Category').value,
+                Year_of_Study: document.getElementById('Year_of_Study').value,
+                Pre_Semester_GPA: document.getElementById('Pre_Semester_GPA').value,
+                Weekly_GenAI_Hours: document.getElementById('Weekly_GenAI_Hours').value,
+                Primary_Use_Case: document.getElementById('Primary_Use_Case').value,
+                Prompt_Engineering_Skill: document.getElementById('Prompt_Engineering_Skill').value,
+                Tool_Diversity: document.getElementById('Tool_Diversity').value,
+                Paid_Subscription: document.getElementById('Paid_Subscription').value,
+                Traditional_Study_Hours: document.getElementById('Traditional_Study_Hours').value,
+                Perceived_AI_Dependency: document.getElementById('Perceived_AI_Dependency').value,
+                Institutional_Policy: document.getElementById('Institutional_Policy').value,
+                Anxiety_Level_During_Exams: document.getElementById('Anxiety_Level_During_Exams').value,
+                Skill_Retention_Score: document.getElementById('Skill_Retention_Score').value
+            };
+
+            try {
+                const response = await fetch(`http://${serverIP}:5000/predict`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    // Cache inputs safely inside storage vectors for local graph loading
+                    localStorage.setItem('burnout_risk', data.burnout_risk);
+                    localStorage.setItem('confidence_score', data.confidence_score);
+                    localStorage.setItem('gpa', payload.Pre_Semester_GPA);
+                    localStorage.setItem('ai_hours', payload.Weekly_GenAI_Hours);
+                    localStorage.setItem('study_hours', payload.Traditional_Study_Hours);
+                    localStorage.setItem('anxiety', payload.Anxiety_Level_During_Exams);
+                    localStorage.setItem('dependency', payload.Perceived_AI_Dependency);
+                    localStorage.setItem('retention', payload.Skill_Retention_Score);
+
+                    // Force explicit relative redirection mapping onto the results module
+                    window.location.href = "./results.html";
+                } else {
+                    alert("Backend Pipeline Error: " + data.message);
+                }
+            } catch (err) {
+                alert(`Cannot communicate with pipeline server at http://${serverIP}:5000. Double check that app.py is active in your system console window!`);
+            }
+        });
+    </script>
+</body>
+</html>

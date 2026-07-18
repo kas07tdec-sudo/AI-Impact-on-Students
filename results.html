@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Impact - Analysis Readout</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --card-dark: #121216;
+            --neon-blue: #00f0ff;
+            --border-color: #24242e;
+            --text-muted: #8a8a9e;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .results-container { max-width: 900px; margin: 0 auto; }
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .back-btn {
+            color: var(--neon-blue);
+            text-decoration: none;
+            border: 1px solid var(--neon-blue);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        .back-btn:hover { background-color: var(--neon-blue); color: black; }
+        .main-score-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+        .risk-display { font-size: 3rem; font-weight: bold; letter-spacing: 3px; margin: 20px 0; }
+        .layout-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 30px; }
+        @media(min-width: 768px) { .layout-grid { grid-template-columns: 1fr 1fr; } }
+        .metrics-subgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .metric-tile {
+            background-color: #16161e;
+            border-left: 3px solid var(--neon-blue);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--neon-blue);
+        }
+        .metric-title { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 5px; }
+        .metric-value { font-size: 1.1rem; font-weight: bold; }
+        .chart-card { background-color: var(--card-dark); border: 1px solid var(--border-color); padding: 20px; }
+        .analysis-box { background-color: #0d0d11; border: 1px dashed var(--border-color); padding: 25px; margin-top: 30px; }
+        .analysis-box h3 { margin-top: 0; color: var(--neon-blue); font-size: 1rem; }
+        .analysis-text { line-height: 1.6; color: #d1d1de; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <div class="header-nav">
+            <div>🚀 AI IMPACT DIAGNOSTIC READOUT</div>
+            <a href="form.html" class="back-btn">< RE-RUN INFERENCE</a>
+        </div>
+
+        <div class="main-score-card">
+            <div style="font-size: 0.8rem; color: var(--text-muted); letter-spacing: 2px;">MODEL DIAGNOSTIC MATRIX</div>
+            <div id="riskValue" class="risk-display">---</div>
+            <div>Model Engine Certainty Vector: <strong id="confidenceValue" style="color: var(--neon-blue);">---</strong></div>
+        </div>
+
+        <div class="layout-grid">
+            <div class="metrics-subgrid">
+                <div class="metric-tile"><div class="metric-title">GPA PROXIMITY</div><div id="gpaValue" class="metric-value">---</div></div>
+                <div class="metric-tile"><div class="metric-title">GENAI VOLUME</div><div id="aiHoursValue" class="metric-value">---</div></div>
+                <div class="metric-tile"><div class="metric-title">STUDY DURATION</div><div id="studyHoursValue" class="metric-value">---</div></div>
+                <div class="metric-tile"><div class="metric-title">EXAM ANXIETY</div><div id="anxietyValue" class="metric-value">---</div></div>
+                <div class="metric-tile"><div class="metric-title">SYSTEM DEPENDENCY</div><div id="dependencyValue" class="metric-value">---</div></div>
+                <div class="metric-tile"><div class="metric-title">SKILL RETENTION</div><div id="retentionValue" class="metric-value">---</div></div>
+            </div>
+            <div class="chart-card">
+                <canvas id="metricsChart" style="max-height: 280px;"></canvas>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <h3>📋 DIAGNOSTIC CONCLUSION SUMMARY</h3>
+            <p id="recommendationText" class="analysis-text">Pulling data indices...</p>
+        </div>
+    </div>
+
+    <script>
+        const risk = localStorage.getItem('burnout_risk') || 'Medium';
+        const confidence = localStorage.getItem('confidence_score') || '50.0%';
+        
+        const riskLabel = document.getElementById('riskValue');
+        riskLabel.textContent = risk + " Risk Profile";
+        document.getElementById('confidenceValue').textContent = confidence;
+        
+        document.getElementById('gpaValue').textContent = localStorage.getItem('gpa') || '3.5';
+        document.getElementById('aiHoursValue').textContent = (localStorage.getItem('ai_hours') || '4.5') + " Hrs/Wk";
+        document.getElementById('studyHoursValue').textContent = (localStorage.getItem('study_hours') || '12') + " Hrs/Wk";
+        document.getElementById('anxietyValue').textContent = (localStorage.getItem('anxiety') || '5') + " / 10";
+        document.getElementById('dependencyValue').textContent = (localStorage.getItem('dependency') || '5') + " / 10";
+        document.getElementById('retentionValue').textContent = (localStorage.getItem('retention') || '75') + "%";
+
+        if (risk.toLowerCase().includes('high')) {
+            riskLabel.style.color = '#ff3131';
+            document.getElementById('recommendationText').textContent = "CRITICAL LIMIT EXCEEDED. Elevated operational dependencies tracking parallel to intense stress registers. Suggest systemic decompression protocols.";
+        } else if (risk.toLowerCase().includes('medium')) {
+            riskLabel.style.color = '#ffb300';
+            document.getElementById('recommendationText').textContent = "MODERATE PARAMETER DRIFT. AI optimization matrices match baseline guidelines but require observation intervals.";
+        } else {
+            riskLabel.style.color = '#39ff14';
+            document.getElementById('recommendationText').textContent = "NOMINAL BASELINE SYSTEMIC OPERATION. Balanced traditional execution metrics against artificial expansion interfaces.";
+        }
+
+        const ctx = document.getElementById('metricsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['GenAI', 'Study', 'Anxiety', 'Dependency', 'Retention'],
+                datasets: [
+                    { label: 'User Values', data: [parseFloat(localStorage.getItem('ai_hours') || 4)*4, parseFloat(localStorage.getItem('study_hours') || 12)*3, parseFloat(localStorage.getItem('anxiety') || 5)*10, parseFloat(localStorage.getItem('dependency') || 5)*10, parseFloat(localStorage.getItem('retention') || 75)], backgroundColor: '#00f0ff' },
+                    { label: 'Baseline Avg', data: [15, 36, 50, 45, 72], backgroundColor: 'rgba(138, 138, 158, 0.3)' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } } }
+        });
+    </script>
+</body>
+</html>

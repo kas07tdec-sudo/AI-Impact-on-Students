@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDAIC Engine - Welcome Baseline</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --card-dark: #121216;
+            --neon-blue: #00f0ff;
+            --border-color: #24242e;
+            --text-muted: #8a8a9e;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .welcome-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--border-color);
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        .badge-top {
+            display: inline-block;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 15px 0;
+            letter-spacing: 5px;
+            line-height: 1.2;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+        p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+        }
+        .start-btn {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 18px;
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 3px;
+            text-decoration: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        .start-btn:hover {
+            background-color: var(--neon-blue);
+            color: #000000;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-card">
+        <div class="badge-top">CORE SYSTEMS INITIALIZED</div>
+        <h1>STUDENT METRIC IMPACT ENGINE</h1>
+        <p>Predictive analytics platform built to assess generative AI footprints, psychometric evaluation variables, and academic burnout vulnerability indicators across 20,000 tracked profiles.</p>
+        <a href="form.html" class="start-btn">START ANALYSIS ANCHOR</a>
+    </div>
+</body>
+</html>
